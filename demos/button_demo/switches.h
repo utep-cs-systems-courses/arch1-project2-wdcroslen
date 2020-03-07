@@ -9,6 +9,8 @@ void switch_init();
 void switch_interrupt_handler();
 //int nums[] = {100,200,300,400,500};
 extern int nums[];
+extern int pacman[];
+extern int cont;
 extern char state,switch_state_down,switch_state_down2,switch_state_down3,switch_state_down4, switch_state_changed; /* effectively boolean */
 
 #endif // included

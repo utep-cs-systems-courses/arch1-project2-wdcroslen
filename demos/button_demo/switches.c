@@ -3,7 +3,9 @@
 #include "led.h"
 #include "buzzer.h"
 #include "statemachines.h"
-int nums[] = {1174,1174,2349,1760,1720,1600,1400,1174,1397,1568};
+int nums[] = {2349,2349,1174,1760,1720,1600,1400,1174,1397,1568};
+int pacman[] = {3951,1975.53,2637,3136,1975.53,2637,3136,3729,1864,2489,2960,1864,2489,2960, 3951,1975.53,2637,3136,1975.53,2637,3136,0,/*brbrbr*/3136,2960,2793,0,2793,2637,2489,0,2489,2349,2093,0,1975};//,3729,1864,2489,2960,1864,2489,2960};
+int cont = 0;
 char state, switch_state_down, switch_state_down2, switch_state_down3,switch_state_down4, switch_state_changed; /* effectively boolean */
 static char 
 switch_update_interrupt_sense()
@@ -16,10 +18,10 @@ switch_update_interrupt_sense()
 }
 void switch_init()/* setup switch */
 {
- // P1REN |= SWITCHES;		/* enables resistors for switches */
+  //P1REN |= SWITCHES;		/* enables resistors for switches */
   // P1IE = SWITCHES;		/* enable interrupts from switches */
-  // P1OUT |= SWITCHES;		/* pull-ups for switches */
-  // P1DIR &= ~SWITCHES;		/* set switches' bits for input */
+   //P1OUT |= SWITCHES;		/* pull-ups for switches */
+  //P1DIR &= ~SWITCHES;		/* set switches' bits for input */
   P2REN |= SWITCHES;		/* enables resistors for switches */
   P2IE = SWITCHES;		/* enable interrupts from switches */
   P2OUT |= SWITCHES;		/* pull-ups for switches */
@@ -37,20 +39,23 @@ void switch_interrupt_handler()
   switch_state_down3 = (p2val & SW3) ? 0 : 1;
   switch_state_down4 = (p2val & SW4) ? 0 : 1; 
   switch_state_changed = 1;
-  if(state == 10){
+  if(state == 12){
   state = 0;
   }
   led_update();
 
   int notes[] = {293, 293, 587};
   if (switch_state_down){
+    cont = ~cont;
+    state = 0;
     advanceSounds(state);
     // buzzer_set_period(400);
     // _enable_interrupts();
     // buzzer_set_period(587);
   }
-  if (!switch_state_down){
+ if (!switch_state_down){
     buzzer_set_period(0);
+    P1REN= ~SWITCHES;
   }
   
   /* 0 when SW1 is up */
