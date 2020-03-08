@@ -13,15 +13,19 @@ __interrupt_vec(WDT_VECTOR) WDT(){ /* 250 interrupts/sec */
     advanceSounds(state);
     blink_count = 0;
   }
-  if (cont2 && ++blink_count == 30) {
+  /* if (cont2 && ++blink_count == 30) {
+     if (state > 64){
+      state = 0;
+    }
     newTune(state);
     blink_count = 0;
-  }
+  } */
   //advance the lights at different speeds
   if(switch_state_down4) {
     if(secondSpeed==1){
       if(++blink_count == 20){
          state_advance();
+	 newTune(state);
 	 blink_count = 0;
       }
     }
