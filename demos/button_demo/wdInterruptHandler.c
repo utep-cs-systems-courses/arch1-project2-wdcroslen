@@ -7,7 +7,14 @@ __interrupt_vec(WDT_VECTOR) WDT(){ /* 250 interrupts/sec */
   static char blink_count = 0;
   //advance sounds
   if (cont && ++blink_count == 33) {
+    if (state >64){
+      state = 0;
+    }
     advanceSounds(state);
+    blink_count = 0;
+  }
+  if (cont2 && ++blink_count == 30) {
+    newTune(state);
     blink_count = 0;
   }
   //advance the lights at different speeds

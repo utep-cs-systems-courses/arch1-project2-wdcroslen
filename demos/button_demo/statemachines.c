@@ -44,6 +44,10 @@ void advanceSounds(int st){
   buzzer_set_period(sans[st]);
   state++;
 }
+void newTune(int st){
+ buzzer_set_period(tetris[st]);
+ state++;
+}
 
 void state_advance()		/* alternate between toggling red & green */
 {

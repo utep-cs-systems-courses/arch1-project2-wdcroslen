@@ -3,11 +3,13 @@
 #include "led.h"
 #include "buzzer.h"
 #include "statemachines.h"
-int sans[] = {100,3405,3405,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,3822,3822,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4050,4050,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4290,4290,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,3405,3405,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,3822,3822,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4050,4050,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4290,4290,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551};
+int sans[] = {100,3405,3405,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,3822,3822,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4050,4050,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4290,4290,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551};//,3405,3405,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,3822,3822,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4050,4050,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551,4290,4290,1700.3,0,2273,0,0,2408,0,2551,0,2863,0,3405,2863,2551};
 
 int pacman[] = {100,3951,0,1975.53,0,2637,0,3136,0,1975.53,2637,0,3136,0,3729,0,1864,0,2489,0,2960,0,1864,2489,0,2960,0,3951,0,1975.53,0,2637,0,3136,0,1975.53,2637,0,3136,0,/*brbrbr*/3136,2960,2793,0,2793,2637,2489,0,2489,2349,2093,0,1975};
-int cont,secondSpeed = 0;
-int firstSpeed = 1;
+
+int tetris[] = {100,3034,3034,0,4050,0,3822,0,3405,0,3034,3405,3822,0,4050,0,4545,4545,4545,0,4545,0,3822,0,3034,3034,3034,0,3405,0,3822,0,4050,4050,0,0,4050,0/*Limit?*/,3822,0,3405,3405,3405,0,3034,3034,0,0,3822,3822,0,0,4545,4545,0,0,4545,4545,4545};
+//int tetris[] = {100,3034,3034,0,4050,0,3822,0,3405,0,3034,3405,3822,0,4050,0,4545,4545,0,0,4545,0,3822,0,3034,3034,0,3405,0,3822,0,4050,4050,0,4050,0,3822,3405,3405,0,3034,0,3822,0,4545,0,4545,4545};
+int cont,cont2,secondSpeed = 0;
 char state, switch_state_down, switch_state_down2, switch_state_down3,switch_state_down4, switch_state_changed; /* effectively boolean */
 static char 
 switch_update_interrupt_sense()
@@ -20,10 +22,6 @@ switch_update_interrupt_sense()
 }
 void switch_init()/* setup switch */
 {
-  //P1REN |= SWITCHES;		/* enables resistors for switches */
-  // P1IE = SWITCHES;		/* enable interrupts from switches */
-   //P1OUT |= SWITCHES;		/* pull-ups for switches */
-  //P1DIR &= ~SWITCHES;		/* set switches' bits for input */
   P2REN |= SWITCHES;		/* enables resistors for switches */
   P2IE = SWITCHES;		/* enable interrupts from switches */
   P2OUT |= SWITCHES;		/* pull-ups for switches */
@@ -47,7 +45,7 @@ void switch_interrupt_handler()
   
   led_update();
 
-  int notes[] = {293, 293, 587};
+  //int notes[] = {293, 293, 587};
   //Switch color and play tune with SW1
   if (switch_state_down){
     cont = ~cont; //global variable to turn off sound the next time you hit SW1
@@ -74,8 +72,10 @@ void switch_interrupt_handler()
  }
  //4th state to make lights blink super fast
  if (switch_state_down4){
-   // firstSpeed = ~firstSpeed;
-   // secondSpeed = ~secondSpeed;
+   cont2 = ~cont2;
+   cont = 0;
+   newTune(state);
+   state = 0;
    state_advance();
  }
  //alternate speeds every press
