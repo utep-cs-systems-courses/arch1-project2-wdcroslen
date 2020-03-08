@@ -39,6 +39,7 @@ char toggle_green()	/* only toggle green if red is on!  */
   }
   return changed;
 }
+//creates the sound array and updates the state to continue through the tune
 void advanceSounds(int st){
   buzzer_set_period(sans[st]);
   state++;
