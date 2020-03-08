@@ -54,9 +54,21 @@ void switch_interrupt_handler()
     // _enable_interrupts();
     // buzzer_set_period(587);
   }
+  //  cont = ~cont;
  if (!switch_state_down){
     buzzer_set_period(0);
     P1REN= ~SWITCHES;
+    P1REN = 0;
+  }
+ if (switch_state_down3){
+   advanceSounds(state);
+   buzzer_set_period(0);
+   if(green_on){
+    P1REN = ~SWITCHES;
+   }
+   else{
+     P1REN = 1;
+   }
   }
   
   /* 0 when SW1 is up */
