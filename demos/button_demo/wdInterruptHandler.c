@@ -10,10 +10,18 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
    blink_count = 0;
   }
   */
-  if (++blink_count == 100 && cont) {
-    advanceSounds(state);
+  if (++blink_count == 33 && cont) {
+    /* if(state > 3){
+      if (++blink_count == 50) {
+	advanceSounds(state);
+	blink_count = 0;  
+      }
+    }*/
+    // else{
+      advanceSounds(state);
     // state_advance();
-    blink_count = 0;
+      blink_count = 0;
+      // }
   }
   //  else if(++blink_count == 100) {
   // advanceSounds(state);

@@ -40,7 +40,7 @@ char toggle_green()	/* only toggle green if red is on!  */
   return changed;
 }
 void advanceSounds(int st){
-  buzzer_set_period(pacman[st]);
+  buzzer_set_period(sans[st]);
   state++;
 }
 
