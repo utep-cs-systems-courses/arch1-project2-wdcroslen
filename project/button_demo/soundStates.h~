@@ -1,0 +1,4 @@
+#include <msp430.h>
+
+void advanceSounds(int st);
+void newTune(int st);
