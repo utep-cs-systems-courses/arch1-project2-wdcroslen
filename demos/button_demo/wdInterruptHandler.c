@@ -6,6 +6,8 @@ void
 __interrupt_vec(WDT_VECTOR) WDT(){ /* 250 interrupts/sec */
   static char blink_count = 0;
   //advance sounds
+  st = sans[state];
+  tet = tetris[state];
   if (cont && ++blink_count == 33) {
     if (state >64){
       state = 0;
@@ -27,6 +29,10 @@ __interrupt_vec(WDT_VECTOR) WDT(){ /* 250 interrupts/sec */
          state_advance();
 	 newTune(state);
 	 blink_count = 0;
+	  if (state >120){
+	    state = 0;
+
+	  }
       }
     }
     else{

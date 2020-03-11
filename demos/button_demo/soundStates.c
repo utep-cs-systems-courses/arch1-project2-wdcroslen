@@ -1,14 +1,16 @@
-#include <msp430.h>
+/*#include <msp430.h>
 #include "statemachines.h"
 #include "led.h"
 #include "switches.h"
 #include "soundStates.h"
 
-void advanceSounds(int st){
-  buzzer_set_period(sans[st]);
+void advanceSounds(){
+  // st = get_elem(sans);
+  buzzer_set_period(st);
   state++;
 }
-void newTune(int st){
- buzzer_set_period(tetris[st]);
+void newTune(){
+ buzzer_set_period(tet);
  state++;
 }
+*/

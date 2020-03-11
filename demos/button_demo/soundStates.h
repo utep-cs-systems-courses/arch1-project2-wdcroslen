@@ -2,6 +2,7 @@
 #include "statemachines.h"
 #include "led.h"
 #include "switches.h"
-void advanceSounds(int st);
+#include "buzzer.h"
+void advanceSounds();
 
-void newTune(int st);
+void newTune();

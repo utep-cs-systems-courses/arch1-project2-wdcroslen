@@ -7,9 +7,8 @@
 #define SWITCHES (SW1 | SW2 | SW3 | SW4)/* only 1 switch on this board */
 void switch_init();
 void switch_interrupt_handler();
-//int nums[] = {100,200,300,400,500};
-extern int sans[],pacman[],tetris[];
-extern int cont,cont2,secondSpeed;
+int get_elem(int song[]);
+extern int sans[],pacman[],tetris[],mario[];
+extern int cont,cont2,secondSpeed,st,tet;
 extern char state,switch_state_down,switch_state_down2,switch_state_down3,switch_state_down4, switch_state_changed; /* effectively boolean */
-
 #endif // included
