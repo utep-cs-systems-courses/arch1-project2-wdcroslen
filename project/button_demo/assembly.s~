@@ -1,0 +1,7 @@
+	.arch msp430g2553
+	.text
+	.globl assembly
+	
+assembly:
+	mov #1, r12
+	

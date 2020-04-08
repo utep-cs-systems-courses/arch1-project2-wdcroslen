@@ -1,4 +1,4 @@
-/*#include <msp430.h>
+#include <msp430.h>
 #include "statemachines.h"
 #include "led.h"
 #include "switches.h"
@@ -13,4 +13,3 @@ void newTune(){
  buzzer_set_period(tet);
  state++;
 }
-*/
