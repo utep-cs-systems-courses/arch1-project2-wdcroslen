@@ -7,10 +7,12 @@ state:
 	.text
 jt:
 	.word case1
-	.word case2
+	.word default
 	.global assembly
 
 assembly:
+	cmp #2, &state
+	jc default
 	mov &state,r12
 	add r12,r12
 	mov jt(r12),r0
@@ -19,7 +21,7 @@ case1:
 	call #toggle_red
 	mov #1, &state
 	jmp out
-case2:
+default:
 	call #toggle_green
 	mov #0, &state
 	jmp out

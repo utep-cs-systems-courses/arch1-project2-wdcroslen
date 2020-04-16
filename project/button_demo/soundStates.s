@@ -6,8 +6,8 @@
 	.extern "buzzer.h"
 	.extern buzzer_set_period
 	; globl soundStates	
-	.globl advanceSounds
-	.globl newTune
+	.global advanceSounds
+	.global newTune
 advanceSounds:	
 	mov st, r12
 	add #1, state
